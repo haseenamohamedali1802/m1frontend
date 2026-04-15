@@ -57,7 +57,7 @@ function UserEditScreen({ params }) {
           <h1>Edit User</h1>
           {loadingUpdate && <Loader />}
           {errorUpdate && (
-            <Message variant="danger" onClose={handleClose}>
+            <Message variant="danger">
               {errorUpdate}
             </Message>
           )}
@@ -65,7 +65,7 @@ function UserEditScreen({ params }) {
           {loading ? (
             <Loader />
           ) : error ? (
-            <Message variant="danger" onClose={handleClose}>
+            <Message variant="danger">
               {error}
             </Message>
           ) : (
