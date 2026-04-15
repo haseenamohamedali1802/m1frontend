@@ -31,7 +31,7 @@ import {
   USER_UPDATE_PROFILE_RESET,
 
 } from "../constants/userConstants";
-import axios from "axios";
+import api from "../api/axiosConfig";
 
 export const signup = (fname, lname, email, password) => async (dispatch) => {
   try {
@@ -45,7 +45,7 @@ export const signup = (fname, lname, email, password) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.post(
+    const { data } = await api.post(
       "/api/users/register/",
       {
         fname: fname,
@@ -84,7 +84,7 @@ export const login = (email, password) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.post(
+    const { data } = await api.post(
       "/api/users/login",
       {
         username: email,   // 🔥 VERY IMPORTANT CHANGE
@@ -134,7 +134,7 @@ export const listUsers = () => async (dispatch, getState) => {
       }
     }
 
-    const { data } = await axios.get(
+    const { data } = await api.get(
       `/api/users/getallusers/`,
       config
     )
@@ -173,7 +173,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
       }
     }
 
-    const { data } = await axios.delete(
+    const { data } = await api.delete(
       `/api/users/delete/${id}/`,
       config
     )
@@ -212,7 +212,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
       }
     }
 
-    const { data } = await axios.put(
+    const { data } = await api.put(
       `/api/users/update/${user._id}/`,
       user,
       config
@@ -250,7 +250,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
           }
       }
 
-      const { data } = await axios.get(
+      const { data } = await api.get(
           `/api/users/${id}/`,
           config
       )
@@ -288,7 +288,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
           }
       }
 
-      const { data } = await axios.put(
+      const { data } = await api.put(
           `/api/users/profile/update/`,
           user,
           config
