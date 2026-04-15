@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,9 +12,7 @@ function PlaceOrderScreen() {
   const navigate = useNavigate();
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, error, success } = orderCreate;
-  const [message, setMessage] = useState("");
   const dispatch = useDispatch();
-  const handleClose = () => setMessage(false);
   const cart = useSelector((state) => state.cart);
 
   cart.itemsPrice = cart.cartItems
@@ -30,11 +28,11 @@ function PlaceOrderScreen() {
   ).toFixed(2);
 
   useEffect(() => {
-    if (success) {
+    if (success && order?._id) {
       navigate(`/order/${order._id}`);
       dispatch({ type: ORDER_CREATE_RESET });
     }
-  }, [success]);
+  }, [success, order, navigate, dispatch]);
 
   const placeOrder = () => {
     dispatch(
@@ -81,7 +79,7 @@ function PlaceOrderScreen() {
               <ListGroup.Item>
                 <h2>Order Items</h2>
                 {cart.cartItems.length === 0 ? (
-                  <Message variant="info" onClose={handleClose}>
+                  <Message variant="info">
                     Your cart is empty
                   </Message>
                 ) : (
@@ -154,7 +152,7 @@ function PlaceOrderScreen() {
 
                 <ListGroup.Item>
                   {error && (
-                    <Message variant="danger" onClose={handleClose}>
+                    <Message variant="danger">
                       {error}
                     </Message>
                   )}

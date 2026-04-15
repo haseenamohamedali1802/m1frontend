@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import products from "../../products";
-import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   Row,
   Col,
@@ -15,20 +15,18 @@ import Loader from "../Loader";
 import Message from "../Message";
 import { listProductDetails } from "../../actions/productAction";
 
-function ProductDetails({ params }) {
+function ProductDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const productDetails = useSelector((state) => state.productDetails);
   const { error, loading, product } = productDetails;
 
   const navigate = useNavigate();
-  const location = useLocation();
   const [qty, setQty] = useState(1);
-  const [message, setMessage] = useState("");
-  const handleClose = () => setMessage(false);
+
   useEffect(() => {
     dispatch(listProductDetails(id));
-  }, [dispatch, params]);
+  }, [dispatch, id]);
 
   const addToCartHandler = () => {
     navigate(`/cart/${id}?qty=${qty}`);
@@ -44,7 +42,7 @@ function ProductDetails({ params }) {
         {loading ? (
           <Loader />
         ) : error ? (
-          <Message variant="danger" onClose={handleClose}>
+          <Message variant="danger">
             {error}
           </Message>
         ) : (
@@ -125,7 +123,7 @@ function ProductDetails({ params }) {
                   <ListGroup.Item>
                     <Button
                       className="btn-block btn-success"
-                      disabled={product.countInStock == 0}
+                      disabled={product.countInStock === 0}
                       type="button"
                       onClick={addToCartHandler}
                     >
