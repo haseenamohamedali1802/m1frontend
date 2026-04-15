@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Button, Table } from 'react-bootstrap'
 import {  Link,useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,8 +10,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 function OrderListScreen() {
     const dispatch = useDispatch()
     const navigate =useNavigate();
-    const [messsage, setMessage] = useState(""); 
-    const handleClose = () => setMessage(false);
+
     const orderList = useSelector(state => state.orderList)
     const { loading, error, orders } = orderList
 
@@ -36,7 +35,7 @@ function OrderListScreen() {
             {loading
                 ? (<Loader />)
                 : error
-                    ? (<Message variant='danger' onClose={handleClose}>{error}</Message>)
+                    ? (<Message variant='danger'>{error}</Message>)
                     : (
                         <Table striped bordered hover responsive className='table-sm'>
                             <thead>

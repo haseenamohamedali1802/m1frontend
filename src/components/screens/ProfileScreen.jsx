@@ -44,14 +44,12 @@ function ProfileScreen() {
       ) {
         dispatch({ type: USER_UPDATE_PROFILE_RESET });
         dispatch(getUserDetails(userInfo._id));
-        dispatch(listMyOrders(orders));
+        dispatch(listMyOrders());
       } else {
         setFname(user.first_name);
         setLname(user.last_name);
       }
     }
-
-    dispatch(listMyOrders(orders));
   }, [dispatch, userInfo, user, success, navigate]);
 
   const submitHandler = (e) => {

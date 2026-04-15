@@ -11,8 +11,8 @@ function OrderScreen() {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [, setMessage] = useState("");
   const handleClose = () => setMessage(false);
-  const [messsage, setMessage] = useState("");
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, error, loading } = orderDetails;

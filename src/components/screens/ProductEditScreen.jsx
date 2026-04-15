@@ -7,13 +7,12 @@ import { useNavigate,useParams } from "react-router-dom";
 import FormContainer from '../FormContainer'
 import Loader from '../Loader'
 import Message from '../Message'
-import axios from 'axios';
+import api from '../../api/axiosConfig';
 
 function ProductEditScreen({params}) {
     const { id } = useParams();
     const navigate =useNavigate();
     const dispatch = useDispatch()
-    const [messsage, setMessage] = useState("");
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
     const [image, setImage] = useState('')
@@ -26,31 +25,24 @@ function ProductEditScreen({params}) {
     const productDetails = useSelector((state)=>state.productDetails);
     const {error,loading,product}=productDetails
   
-    const handleClose = () => setMessage(false);
     const productUpdate = useSelector(state => state.productUpdate)
     const { error: errorUpdate, loading: loadingUpdate, success: successUpdate } = productUpdate
 
-
-
     useEffect(()=>{
-        
-   
-            if (!product.name || product._id !== Number(id)) {
-                dispatch(listProductDetails(id))
-            } else {
-                setName(product.name)
-                setPrice(product.price)
-                setImage(product.image)
-                setBrand(product.brand)
-                setCategory(product.category)
-                setCountInStock(product.countInStock)
-                setDescription(product.description)
-
-            }  
-        
-        
-    
-      },[dispatch,product,id])
+        if (successUpdate) {
+            navigate('/admin/productList')
+        } else if (!product.name || product._id !== Number(id)) {
+            dispatch(listProductDetails(id))
+        } else {
+            setName(product.name)
+            setPrice(product.price)
+            setImage(product.image)
+            setBrand(product.brand)
+            setCategory(product.category)
+            setCountInStock(product.countInStock)
+            setDescription(product.description)
+        }  
+    },[dispatch,product,id,successUpdate,navigate])
     
 
 
@@ -70,7 +62,7 @@ function ProductEditScreen({params}) {
                 }
             }
 
-            const { data } = await axios.post('/api/products/upload/', formData, config)
+            const { data } = await api.post('/api/products/upload/', formData, config)
 
 
             setImage(data)
@@ -109,9 +101,9 @@ function ProductEditScreen({params}) {
             <FormContainer>
                 <h1>Edit Product</h1>
                 {loadingUpdate && <Loader />}
-                {errorUpdate && <Message variant='danger' onClose={handleClose}>{errorUpdate}</Message>}
+                {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
 
-                {loading ? <Loader /> : error ? <Message variant='danger' onClose={handleClose}>{error}</Message>
+                {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message>
                     : (
                         <Form onSubmit={submitHandler}>
 
