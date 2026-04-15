@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
 import {
   Row,
@@ -15,12 +15,10 @@ import { addToCart, removeFromCart } from "../../actions/cartActions";
 import { useDispatch, useSelector } from "react-redux";
 
 
-function CartScreen({ params }) {
+function CartScreen() {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const [message, setMessage] = useState('')
-  const handleClose = () => setMessage(false);
   const productId = id;
   const qty = location.search ? Number(location.search.split("=")[1]) : 1;
   const dispatch = useDispatch();

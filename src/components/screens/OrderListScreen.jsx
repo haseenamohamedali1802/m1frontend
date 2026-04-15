@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Button, Table } from 'react-bootstrap'
-import {  Link,useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../Message'
 import Loader from '../Loader'
@@ -24,7 +24,7 @@ function OrderListScreen() {
             navigate('/login')
         }
 
-    }, [dispatch, userInfo])
+    }, [dispatch, userInfo, navigate])
 
 
 
