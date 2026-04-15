@@ -12,14 +12,9 @@ function UserEditScreen({ params }) {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [messsage, setMessage] = useState("");
-  const handleClose = () => setMessage(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
-
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
 
   const userDetails = useSelector((state) => state.userDetails);
   const { error, loading, user } = userDetails;
@@ -44,7 +39,7 @@ function UserEditScreen({ params }) {
       setIsAdmin(user.isAdmin);
     }
   }
-}, [dispatch, id, successUpdate, navigate]);
+}, [dispatch, id, successUpdate, navigate, user]);
 
   const submitHandler = (e) => {
     e.preventDefault();

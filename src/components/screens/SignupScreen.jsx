@@ -17,6 +17,13 @@ function SignupScreen() {
   const userSignup = useSelector((state) => state.userSignup);
   const { error, loading, userInfo } = userSignup;
   const handleClose = () => setMessage("");
+
+  // Navigate to redirect path after successful signup
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [userInfo, navigate, redirect]);
   const [formValues, setFormValues] = useState({
     firstname: "",
     lastname: "",

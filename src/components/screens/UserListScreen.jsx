@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,8 +10,6 @@ import { listUsers, deleteUser } from "../../actions/userAction";
 function UserListScreen() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [messsage, setMessage] = useState("");
-  const handleClose = () => setMessage(false);
 
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
@@ -28,7 +26,7 @@ function UserListScreen() {
     } else {
       navigate("/login");
     }
-  }, [dispatch, userInfo, successDelete]);
+  }, [dispatch, userInfo, successDelete, navigate]);
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
@@ -44,7 +42,7 @@ function UserListScreen() {
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message variant="danger" onClose={handleClose}>
+        <Message variant="danger">
           {error}
         </Message>
       ) : (
