@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../Message";
 import Loader from "../Loader";
 import { getOrderDetails, deliverOrder } from "../../actions/orderActions";
+import getImageUrl from "../../utils/imageUrl";
 
 function OrderScreen() {
   const { id } = useParams();
@@ -93,7 +94,7 @@ function OrderScreen() {
                                                     <ListGroup.Item key={index}>
                                                         <Row>
                                                             <Col md={1}>
-                                                                <Image src={item.image} alt={item.name} fluid rounded />
+                                                                <Image src={getImageUrl(item.image)} alt={item.name} fluid rounded />
                                                             </Col>
 
                                                             <Col>

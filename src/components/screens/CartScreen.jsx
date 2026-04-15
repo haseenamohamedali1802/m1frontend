@@ -13,6 +13,7 @@ import {
 import Message from "../Message";
 import { addToCart, removeFromCart } from "../../actions/cartActions";
 import { useDispatch, useSelector } from "react-redux";
+import getImageUrl from "../../utils/imageUrl";
 
 
 function CartScreen() {
@@ -58,7 +59,7 @@ function CartScreen() {
                     <Row>
                       <Col md={2}>
                         <Image
-                          src={item.image}
+                          src={getImageUrl(item.image)}
                           alt={item.name}
                           fluid
                           rounded

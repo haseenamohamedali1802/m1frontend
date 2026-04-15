@@ -7,6 +7,7 @@ import Message from "../Message";
 import { createOrder } from "../../actions/orderActions";
 import { ORDER_CREATE_RESET } from "../../constants/orderConstants";
 import { useNavigate } from "react-router-dom";
+import getImageUrl from "../../utils/imageUrl";
 
 function PlaceOrderScreen() {
   const navigate = useNavigate();
@@ -89,7 +90,7 @@ function PlaceOrderScreen() {
                         <Row>
                           <Col md={1}>
                             <Image
-                              src={item.image}
+                              src={getImageUrl(item.image)}
                               alt={item.name}
                               fluid
                               rounded

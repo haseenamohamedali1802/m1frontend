@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loader";
 import Message from "../Message";
 import { listProductDetails } from "../../actions/productAction";
+import getImageUrl from "../../utils/imageUrl";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -48,7 +49,7 @@ function ProductDetails() {
         ) : (
           <Row>
             <Col md={6}>
-              <Image src={product.image} alt={product.name} fluid />
+              <Image src={getImageUrl(product.image)} alt={product.name} fluid />
             </Col>
             <Col md={3}>
               <ListGroup variant="flush">
