@@ -35,7 +35,7 @@ function Header() {
               <Nav.Link>Checkout</Nav.Link>
             </LinkContainer>
 
-            {userInfo ? (
+            {userInfo && userInfo.first_name ? (
               <NavDropdown
                 title={`Welcome ${userInfo.first_name}`}
                 id="username"
